@@ -23,9 +23,16 @@ ManageIQ.angular.app.controller('pglogicalReplicationFormController', ['$http', 
 
       if ($scope.pglogicalReplicationModel.replication_type == "none")
         miqService.miqFlash("warn", __("No replication role has been set"));
-
+      if ($scope.pglogicalReplicationModel.replication_type == "remote")
+        $scope.replicationTypeChanged();
       $scope.afterGet = true;
       $scope.modelCopy = angular.copy( $scope.pglogicalReplicationModel );
+      if ($scope.pglogicalReplicationModel.exclusion_list !== $scope.modelCopy.exclusion_list) {
+        $timeout(function () {
+          codeMirror = CodeMirror.fromTextArea(document.getElementById('exclusion_list'));
+          codeMirror.refresh();
+        });
+      }
       miqService.sparkleOff();
     });
   };
