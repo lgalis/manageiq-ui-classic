@@ -661,6 +661,7 @@ module OpsController::OpsRbac
     self.x_node = @sb[:pre_edit_node]
     get_node_info(x_node)
     @edit = nil # clean out the saved info
+    tree_selected_model
     replace_right_cell(:nodetype => @nodetype)
   end
 
@@ -765,6 +766,7 @@ module OpsController::OpsRbac
       end
       # Get selected Node
       get_node_info(x_node)
+      tree_selected_model
       replace_right_cell(:nodetype => x_node, :replace_trees => [:rbac])
       return
     end
