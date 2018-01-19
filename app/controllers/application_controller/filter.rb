@@ -93,7 +93,7 @@ module ApplicationController::Filter
       render :update do |page|
         page << javascript_prologue
         page.replace("flash_msg_div", :partial => "layouts/flash_msg")
-        page.replace("exp_editor_div", :partial => "layouts/exp_editor")
+        page.replace("exp_editor_div", :partial => "layouts/exp_editor", :locals => {:expression_type => @expkey})
         page << "$('#exp_#{token}').css({'background-color': 'yellow'})"
         page << javascript_hide("exp_buttons_off")
         if exp.key?("not") || @parent_is_not
@@ -130,7 +130,7 @@ module ApplicationController::Filter
       render :update do |page|
         page << javascript_prologue
         page.replace("exp_editor_flash", :partial => "layouts/flash_msg", :locals => {:flash_div_id => 'exp_editor_flash'})
-        page.replace("exp_atom_editor_div", :partial => "layouts/exp_atom/editor")
+        page.replace("exp_atom_editor_div", :partial => "layouts/exp_atom/editor", :locals => {:expression_type => @edit[@exp_key]})
 
         page << ENABLE_CALENDAR if @edit[@expkey].calendar_needed?
         @edit[@expkey].render_values_to(page)
