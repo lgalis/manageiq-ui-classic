@@ -169,11 +169,6 @@ class AutomationManagerController < ApplicationController
 
   private
 
-  def is_template_record?
-    @record.kind_of?(ConfigurationWorkflow) || @record.kind_of?(ConfigurationScript)
-  end
-  helper_method :is_template_record?
-
   def textual_group_list
     [%i(properties tags)]
   end
